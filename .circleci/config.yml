@@ -12,5 +12,5 @@ jobs:
           name: Build
           command: yarn build
       - run:
-          name: Check dist
-          command: ls -la dist
+          name: Check doc
+          command: ls -la doc
