@@ -21,4 +21,3 @@ jobs:
             git commit -m "[ci skip] Deploy by CI"
             git push -f https://github.com/ikarostech/HPADesign.git master:master
             echo "deploy completed"
-            cd -
