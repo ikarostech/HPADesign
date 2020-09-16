@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy:github": "cross-env DEPLOY='github' run-s build send:github",
+    "send:github": "push-dir --dir=dist --branch=gh-pages --message='[ci skip] Deploy'"
   },
   "dependencies": {
     "core-js": "^3.6.5",
