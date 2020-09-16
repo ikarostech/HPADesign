@@ -17,4 +17,8 @@ jobs:
           command: |
             git config --global user.name "Circle CI"
             git config --global user.email "<>"
-            yarn run deploy:github
+            git add -A
+            git commit -m "[ci skip] Deploy by CI"
+            git push -f https://github.com/ikarostech/HPADesign.git master:master
+            echo "deploy completed"
+            cd -
