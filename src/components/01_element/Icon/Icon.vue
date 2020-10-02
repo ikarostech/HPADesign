@@ -1,6 +1,5 @@
 <template>
     <span>
-        <!-- did not work! -->
         <img src="@/assets/Icon/Logo.png" />
     </span>
 </template>
