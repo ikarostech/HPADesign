@@ -2,8 +2,8 @@ import { storiesOf } from '@storybook/vue';
 
 import Icon from './Icon.vue';
 
-storiesOf('Icon一覧',module)
+storiesOf('Icons', module)
     .add('Logo', () => ({
-        components: {Icon},
-        template: `<Icon type="Logo" />`
-    }));
+        components: { Icon },
+        template: '<Icon type="logo" />'
+    }))

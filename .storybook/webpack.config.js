@@ -8,7 +8,8 @@ module.exports = {
         loaders: ["style-loader", "css-loader", "stylus-loader",{
           loader: 'vuetify-loader',
           options: {
-            theme: path.resolve(__dirname, '../src/stylus/')
+            theme: path.resolve(__dirname, '../src/stylus/'),
+            url: true
           }
         }],
         include: path.resolve(__dirname, '../src')

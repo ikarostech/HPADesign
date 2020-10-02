@@ -3,5 +3,12 @@ module.exports = {
   "outputDir": "docs",
   "transpileDependencies": [
     "vuetify"
-  ]
+  ],
+  configureWebpack: {
+    resolve: {
+      alias: {
+        vue$: 'vue/dist/vue.esm.js',
+      },
+    },
+  },
 }

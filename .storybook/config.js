@@ -5,7 +5,7 @@ function requireAll(requireContext) {
   }
   
 function loadStories() {
-    requireAll(require.context("..", true, /_story\.tsx?$/));
+    requireAll(require.context("..", true, /_story\.(tsx|vue)?$/));
 }
 
 configure(loadStories, module);

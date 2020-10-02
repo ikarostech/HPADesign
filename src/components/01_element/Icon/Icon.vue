@@ -1,17 +1,15 @@
 <template>
     <span>
-        <img v-bind:src="'~/assets/Icon/' + props.type">
+        <!-- did not work! -->
+        <img src="@/assets/Icon/Logo.png" />
     </span>
 </template>
 <script lang="ts">
 import Vue from 'vue';
 
-export const IconType = {
-    Logo: 'Logo',
-}
 export default Vue.extend({
     props: {
         type: String
-    }
+    },
 })
 </script>
