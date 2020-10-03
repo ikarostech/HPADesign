@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@storybook/vue": "^6.0.21",
+    "@types/jest": "^26.0.14",
     "@vue/test-utils": "^1.1.0",
     "babel-jest": "^26.3.0",
     "core-js": "^3.6.5",
@@ -66,5 +67,21 @@
     "not dead"
   ],
   "_id": "hpa_design@0.1.0",
-  "readme": "ERROR: No README data found!"
+  "readme": "ERROR: No README data found!",
+
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx|js|jsx)?$": "babel-jest",
+      ".*\\.(vue)$": "vue-jest"
+    },
+    "snapshotSerializers": [
+      "jest-serializer-vue"
+    ]
+  },
+  "type": "module"
 }

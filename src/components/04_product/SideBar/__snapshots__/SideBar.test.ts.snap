@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideBar snapshot test 1`] = `
+<v-navigation-drawer
+  app=""
+  color="primary"
+  dark=""
+>
+  <v-list-item>
+    <v-list-item-content>
+      <v-list-item-title>
+        
+                HPADesign
+            
+      </v-list-item-title>
+       
+      <v-list-item>
+        
+                Concept
+            
+      </v-list-item>
+       
+      <v-list-item>
+        
+                Airfoil
+            
+      </v-list-item>
+       
+      <v-list-item>
+        
+                Aerodynamics
+            
+      </v-list-item>
+       
+      <v-list-item>
+        
+                Structure
+            
+      </v-list-item>
+    </v-list-item-content>
+  </v-list-item>
+</v-navigation-drawer>
+`;
