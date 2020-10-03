@@ -19,6 +19,9 @@ jobs:
     executor: node-executor
     steps:
       - run:
+          name: Install dependencies
+          command: yarn
+      - run:
           name: Build
           command: yarn build
       - run:
