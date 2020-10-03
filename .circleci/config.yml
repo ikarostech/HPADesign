@@ -18,6 +18,7 @@ jobs:
   deploy:
     executor: node-executor
     steps:
+      - checkout
       - run:
           name: Install dependencies
           command: yarn
