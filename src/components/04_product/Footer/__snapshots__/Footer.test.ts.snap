@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer snapshot test 1`] = `
+<v-footer
+  app=""
+  color="primary"
+  dark=""
+>
+  
+    2018-2020 Ryo Asano This program is published on MIT Lisence
+
+</v-footer>
+`;

@@ -1,0 +1,23 @@
+<template>
+    <v-navigation-drawer color="primary" dark app>
+        <v-list-item>
+            <v-list-item-content>
+                <v-list-item-title>
+                    HPADesign
+                </v-list-item-title>
+                <v-list-item>
+                    Concept
+                </v-list-item>
+                <v-list-item>
+                    Airfoil
+                </v-list-item>
+                <v-list-item>
+                    Aerodynamics
+                </v-list-item>
+                <v-list-item>
+                    Structure
+                </v-list-item>
+            </v-list-item-content>
+        </v-list-item>
+    </v-navigation-drawer>
+</template>
