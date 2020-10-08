@@ -2,7 +2,9 @@
   <v-app>
     <TopBar />
     <SideBar />
-    <router-view />
+    <v-content>
+      <router-view />
+    </v-content>
     <Footer />
   </v-app>
 </template>

@@ -6,13 +6,15 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
+import { storiesOf } from '@storybook/vue';
 
-export default Vue.extend({
-  name: 'App',
+//import DataTable from './DataTable.vue';
 
-  data() {
-      return {
-          headers: [
+const testStory = Vue.extend({
+    //components: { DataTable },
+    data () {
+        return {
+            headers: [
                 {
                     text: 'key',
                     value: 'key'
@@ -26,7 +28,12 @@ export default Vue.extend({
                 { key: "key1", item: "item1" },
                 { key: "key2", item: "item2" },
             ],
-      }
-  }
-})
+        }
+    }
+});
+export default testStory;
+
+storiesOf("DataTable", module)
+    .add("DataTable", () => testStory);
+
 </script>

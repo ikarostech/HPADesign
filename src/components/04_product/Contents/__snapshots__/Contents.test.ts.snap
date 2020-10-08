@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Contents snapshot test 1`] = `
-<v-content>
-  <h1>
-    routerView
-  </h1>
-</v-content>
-`;

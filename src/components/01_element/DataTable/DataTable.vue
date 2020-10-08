@@ -7,12 +7,15 @@
 <script lang="ts">
 import Vue from 'vue';
 
-export default Vue.extend({
-  name: 'App',
 
-  data() {
-      return {
-          headers: [
+export default Vue.extend({
+    props: {
+        //headers: Array,
+        //items: Array,
+    },
+    data () {
+        return {
+            headers: [
                 {
                     text: 'key',
                     value: 'key'
@@ -26,7 +29,7 @@ export default Vue.extend({
                 { key: "key1", item: "item1" },
                 { key: "key2", item: "item2" },
             ],
-      }
-  }
+        }
+    }
 })
 </script>
