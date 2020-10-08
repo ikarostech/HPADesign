@@ -1,5 +1,5 @@
 <template>
-    <v-data-table 
+    <DataTable
         :headers="headers"
         :items="items"
     />
@@ -8,10 +8,10 @@
 import Vue from 'vue';
 import { storiesOf } from '@storybook/vue';
 
-//import DataTable from './DataTable.vue';
+import DataTable from './DataTable.vue';
 
 const testStory = Vue.extend({
-    //components: { DataTable },
+    components: { DataTable },
     data () {
         return {
             headers: [
