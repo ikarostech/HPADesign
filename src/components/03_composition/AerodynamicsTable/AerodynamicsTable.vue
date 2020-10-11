@@ -1,25 +1,47 @@
 <template>
- <Table />
+	<DataTable
+			:headers="header"
+			:items="testItems"
+	/>
 </template>
 <script lang="ts">
 import Vue from 'vue';
 
-import Table from '@/component/01_element/Table.vue';
+import DataTable from '@/components/01_element/DataTable/DataTable.vue';
 
 export default Vue.extend({
-    components: {
-        Table
-    },
-    data () {
-        const header: Array<String> = [
-            "翼根からの距離[m]",
-            "翼弦長[m]",
-            "翼型",
-            "揚力密度[kg/m2]",
-        ]
-        return {
-            header
-        }
-    }
+	components: {
+			DataTable
+	},
+	data () {
+		return {
+			header: [
+				{
+					text: '翼根からの距離[m]',
+					value: 'dist'
+				},
+				{
+					text: '翼弦長[m]',
+					value: 'chord'
+				},
+				{
+					text: '翼型',
+					value: 'airfoil'
+				},
+				{
+					text: "揚力密度[kg/m2]",
+					value: 'liftDensity'
+				}
+			],
+			testItems: [
+				{ 
+					dist: 0,
+					chord: 1200,
+					airfoil: 'naca4412',
+					liftDensity: 1.2
+				}
+			],
+		}
+	}
 })
 </script>

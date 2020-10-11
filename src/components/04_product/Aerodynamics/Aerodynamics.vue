@@ -1,32 +1,33 @@
 <template>
-    <v-data-table 
-        :headers="headers"
-        :items="items"
-    />
+	<div>
+		<AerodynamicsTable/>
+	</div>
 </template>
 <script lang="ts">
 import Vue from 'vue';
-
+import AerodynamicsTable from '@/components/03_composition/AerodynamicsTable/AerodynamicsTable.vue';
 export default Vue.extend({
   name: 'App',
-
-  data() {
-      return {
-          headers: [
-                {
-                    text: 'key',
-                    value: 'key'
-                },
-                {
-                    text: 'item',
-                    value: 'item'
-                }
-            ],
-            items: [
-                { key: "key1", item: "item1" },
-                { key: "key2", item: "item2" },
-            ],
-      }
+	components: {
+		AerodynamicsTable
+	},
+	data() {
+			return {
+					headers: [
+					{
+							text: 'key',
+							value: 'key'
+					},
+					{
+							text: 'item',
+							value: 'item'
+					}
+			],
+			items: [
+					{ key: "key1", item: "item1" },
+					{ key: "key2", item: "item2" },
+			],
+    }
   }
 })
 </script>
