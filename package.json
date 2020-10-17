@@ -87,7 +87,12 @@
     },
     "snapshotSerializers": [
       "jest-serializer-vue"
-    ]
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    }
   },
   "type": "module"
 }
