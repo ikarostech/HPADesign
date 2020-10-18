@@ -93,6 +93,5 @@
         "tsConfig": "tsconfig.json"
       }
     }
-  },
-  "type": "module"
+  }
 }
