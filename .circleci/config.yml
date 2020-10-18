@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node-executor:
     docker:
-          - image: circleci/node:12.18
+          - image: circleci/node:13.7.0
 jobs:
   test:
     executor: node-executor
@@ -24,7 +24,7 @@ jobs:
           command: yarn
       - run:
           name: Build
-          command: yarn build --experimental-modules
+          command: yarn build \
       - run:
           name: Deploy
           command: |
