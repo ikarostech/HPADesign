@@ -2,8 +2,8 @@
 version: 2.1
 executors:
   node-executor:
-    docker:
-          - image: circleci/node:13.2.0
+    name: node/default
+    tag: '13'
 jobs:
   test:
     executor: node-executor
