@@ -10,9 +10,9 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install dependencies
-        command: yarn
+          name: Install dependencies
+          command: yarn
       - run:
-        name: Test
-        command: yarn test
+          name: Test
+          command: yarn test
 
