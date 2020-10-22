@@ -16,7 +16,9 @@ jobs:
         name: Test
         command: yarn test
 workflows:
-  test:
+  # Name the workflow "welcome"
+  welcome:
+    # Run the welcome/run job in its own container
     jobs:
       - test
 workflows:
