@@ -15,4 +15,8 @@ jobs:
       - run:
           name: Test
           command: yarn test
+workflows:
+  test:
+    jobs:
+      - test
 
