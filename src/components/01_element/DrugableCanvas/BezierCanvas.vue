@@ -1,21 +1,33 @@
 <template>
-<canvas 
-    v-on:mousedown="mousedown" 
-    v-on:mouseup="mouseup"
-    v-on:mousemove="mousemove"
-/>
+	<canvas 
+		v-on:mousedown="mousedown" 
+		v-on:mouseup="mouseup"
+		v-on:mousemove="mousemove"
+	/>
 </template>
 
 <script>
 import Vue from 'vue';
 
+let canvas;
+let ctx;
+
 export default Vue.extend({
+	name: 'App',
 	props: {
 		curves: Array,
 		radius: Number
 	},
-
+	mounted: function(){
+		canvas = this.$refs.canvas;
+		ctx = canvas.getContext('2d');
+		this.draw();
+	},
 	methods: {
+		created: function() {
+			console.log(this.isDrag);
+		},
+		
 		mousedown: function() {
 			this.isDrag = true;
 			console.log(this.isDrag);
@@ -27,25 +39,21 @@ export default Vue.extend({
 		mousemove: function() {
 
 		},
-		mounted (){
-			this.canvas = this.$refs.canvas;
-			this.ctx = this.canvas.getContext('2d');
-			this.draw();
-		},
-		draw() {
+		draw: function(){
+			console.log("draw")
 			this.drawCircle();
 		},
-		drawCircle() {
+		drawCircle: function() {
 			this.Curves.foreach( curve => {
 				curve.Points
 					.filter(item => item.visible)
 					.map(item => item.point)
 					.foreach(point => {
-						this.ctx.beginPath();
-						this.ctx.arc(point.x,point.y,0,this.radius,Math.PI * 2,0);
-						this.ctx.fillStyle = "rgba(255,255,255,1)";
-						this.ctx.fill();
-						this.ctx.stroke();
+						ctx.beginPath();
+						ctx.arc(point.x,point.y,0,this.radius,Math.PI * 2,0);
+						ctx.fillStyle = "rgba(255,255,255,1)";
+						ctx.fill();
+						ctx.stroke();
 					});
 			});
 		},
@@ -53,11 +61,7 @@ export default Vue.extend({
 
 		},
 	},
-	mounted() {
-		//this.canvas = this.$refs.canvas as InstanceType<typeof HTMLCanvasElement>;
-
-
-	}
+	
 });
 </script>
 <style module>
