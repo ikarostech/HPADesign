@@ -36,21 +36,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var test_utils_1 = require("@vue/test-utils");
+exports.CL_ModelService = void 0;
 var tf = require("@tensorflow/tfjs");
-var AIAirfoilCanvas_vue_1 = require("./AIAirfoilCanvas.vue");
-describe('Tensorflowjs', function () {
-    it('CL model', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var model_CL, wrapper;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, tf.loadLayersModel("https://raw.githubusercontent.com/ikarostech/DW/master/model.json")];
-                case 1:
-                    model_CL = _a.sent();
-                    wrapper = test_utils_1.shallowMount(AIAirfoilCanvas_vue_1["default"]);
-                    expect(wrapper.vm.predict_CL).toBe(0.9221804);
-                    return [2 /*return*/];
-            }
+var CL_ModelService = /** @class */ (function () {
+    function CL_ModelService(model) {
+        this.model = model;
+    }
+    CL_ModelService.newBuild = function () {
+        return __awaiter(this, void 0, Promise, function () {
+            var model, service;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, tf.loadLayersModel("https://raw.githubusercontent.com/ikarostech/DW/master/model.json")];
+                    case 1:
+                        model = _a.sent();
+                        service = new CL_ModelService(model);
+                        return [2 /*return*/, service];
+                }
+            });
         });
-    }); });
-});
+    };
+    CL_ModelService.prototype.predict = function (point) {
+        return Number(this.model.predict(point.getTFShape()).toString().replace(/[^0-9|.]/g, ''));
+    };
+    return CL_ModelService;
+}());
+exports.CL_ModelService = CL_ModelService;
