@@ -57,7 +57,7 @@ var CL_ModelService = /** @class */ (function () {
         });
     };
     CL_ModelService.prototype.predict = function (point) {
-        return Number(this.model.predict(point.getTFShape()).toString().replace(/[^0-9|.]/g, ''));
+        return Number(this.model.predict(point.getTFTensor()).toString().replace(/[^0-9|.]/g, ''));
     };
     return CL_ModelService;
 }());

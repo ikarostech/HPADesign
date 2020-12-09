@@ -1,6 +1,6 @@
 import * as tf from '@tensorflow/tfjs';
 
-import AIAirfoilPoint from '../AIAifoilPoint/AIAirfoilPoint';
+import { AIAirfoilPoint } from '../AIAirfoilPoint/AIAirfoilPoint';
 
 export class CL_ModelService {
 
@@ -15,8 +15,8 @@ export class CL_ModelService {
     return service;
   }
 
-  public predict(point : AIAirfoilPoint): Number {
-    return Number(this.model.predict(point.getTFShape()).toString().replace(/[^0-9|.]/g, ''));
+  public predict(point : AIAirfoilPoint): number {
+    return Number(this.model.predict(point.getTFTensor()).toString().replace(/[^0-9|.]/g, ''));
   }
   
 }
