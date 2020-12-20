@@ -26,7 +26,7 @@ export default Vue.extend({
   },
   data: function() {
     let test1 : CanvasPoint = {
-      point: new Vector2(100,100),
+      point: new Vector2(0,0),
       visible: true
     }
     let test2 : CanvasPoint = {
