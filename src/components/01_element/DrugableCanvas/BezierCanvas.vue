@@ -11,6 +11,28 @@
 
 <script>
 import Vue from 'vue';
+//import { Vector2 } from 'three/src/math/Vector2';
+
+export function buildBezierCurve(linspaceSize) {
+	let bezierCurves = []
+	this.curves.forEach( curve => {
+		const bezierPoints = []
+		//TODO BezierPointの仕様変更
+		for(let i = 0; i < curve.points.size; i+=2) {
+			const p1 = curve.points[i];
+			const c = curve.points[i+1];
+			const p2 = curve.points[i+2];
+
+			for(let n = 0; n < linspaceSize; n++) {
+				let t = n / linspaceSize;
+				let pos = Math.pow(1-t, 2) * p1 + t*(1-t) * c + Math.pow(t, 2) * p2;
+				bezierPoints.push(pos);
+			}
+		}
+		bezierCurves.push(bezierPoints);
+	});
+	return bezierCurves;
+}
 
 export default Vue.extend({
 	name: 'App',
@@ -31,9 +53,6 @@ export default Vue.extend({
 		this.canvas = this.$refs.drawCanvas;
 		this.ctx = this.canvas.getContext('2d');
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		console.log(this.canvas.height);
-		this.ctx.fillRect(20,20,280,280);
-
 		this.draw();
 	},
 	
@@ -58,15 +77,15 @@ export default Vue.extend({
 					.map(item => item.point)
 					.forEach(point => {
 						this.ctx.beginPath();
-						this.ctx.arc(point.x,point.y,0,this.radius,Math.PI * 2,0);
-						this.ctx.fillStyle = "rgba(0,0,0,1)";
+						this.ctx.arc(point.x, point.y, this.radius, 0 ,Math.PI * 2, false);
+						this.ctx.fillStyle = "rgba(0,0,0,0.87)";
 						this.ctx.fill();
 						this.ctx.stroke();
 					});
 			});
 		},
+		
 		drawLine() {
-
 		},
 	},
 	
