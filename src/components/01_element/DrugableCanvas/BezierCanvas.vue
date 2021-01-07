@@ -9,23 +9,31 @@
 	/>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts">
+import { Vector2 } from 'three/src/math/Vector2';
+import Vue, { PropType } from 'vue';
+import { BezierCurve } from './BezierCurve';
+import { CanvasPoint } from './CanvasPoint';
+
 //import { Vector2 } from 'three/src/math/Vector2';
 
-export function buildBezierCurve(linspaceSize) {
-	let bezierCurves = []
-	this.curves.forEach( curve => {
-		const bezierPoints = []
+export function buildBezierCurve(curves:BezierCurve[] ,linspaceSize: number) {
+	const bezierCurves: Vector2[][] = [];
+	curves.forEach( curve => {
+		const bezierPoints: Vector2[] = [];
 		//TODO BezierPointの仕様変更
-		for(let i = 0; i < curve.points.size; i+=2) {
-			const p1 = curve.points[i];
-			const c = curve.points[i+1];
-			const p2 = curve.points[i+2];
+		for(let i = 0; i < curve.points.length; i+=2) {
+			const p1: Vector2 = curve.points[i].point;
+			const c: Vector2 = curve.points[i+1].point;
+			const p2: Vector2 = curve.points[i+2].point;
 
 			for(let n = 0; n < linspaceSize; n++) {
-				let t = n / linspaceSize;
-				let pos = Math.pow(1-t, 2) * p1 + t*(1-t) * c + Math.pow(t, 2) * p2;
+				let t: number = n / linspaceSize;
+				let pos: Vector2 = 
+					p1.multiplyScalar(Math.pow(1-t, 2))
+					.add(c.multiplyScalar(t*(1-t)))
+					.add(p2.multiplyScalar(Math.pow(t, 2)));
+				
 				bezierPoints.push(pos);
 			}
 		}
@@ -34,18 +42,27 @@ export function buildBezierCurve(linspaceSize) {
 	return bezierCurves;
 }
 
+export type DataType = {
+	canvas: any,
+	ctx: any,
+	width: number,
+	height: number,
+	isDrag: boolean
+}
+
 export default Vue.extend({
 	name: 'App',
 	props: {
-		curves: Array,
+		curves: Object as PropType<Array<BezierCurve>>,
 		radius: Number
 	},
-	data: function() {
+	data: function(): DataType {
 		return {
 			canvas: null,
-			context: null,
+			ctx: null,
 			width: 600,
-			height: 200
+			height: 200,
+			isDrag: false
 		};
 	},
 
@@ -71,6 +88,7 @@ export default Vue.extend({
 			this.drawCircle();
 		},
 		drawCircle: function() {
+			
 			this.curves.forEach( curve => {
 				curve.points
 					.filter(item => item.visible)
@@ -83,6 +101,7 @@ export default Vue.extend({
 						this.ctx.stroke();
 					});
 			});
+			
 		},
 		
 		drawLine() {

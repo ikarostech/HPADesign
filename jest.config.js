@@ -2,7 +2,7 @@ module.exports = {
   preset: 'ts-jest/presets/js-with-ts',
   moduleDirectories: ['node_modules', 'src'],
   modulePaths: ['<rootDir>/src', '<rootDir>/node_modules'],
-  
+  setupFiles: ['jest-canvas-mock'],
   transformIgnorePatterns: ['node_modules/(?!(vue/dist/vue.esm.js|three)/)'],
   moduleFileExtensions: [
     "js",
