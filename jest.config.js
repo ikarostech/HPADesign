@@ -9,8 +9,6 @@ module.exports = {
     "ts",
     "vue"
   ],
-  //TODO jsファイルで書かれたテストはimport文が対応しておらず落ちてしまうので一時的に無効にする
-  modulePathIgnorePatterns: ['src/components/01_element/DrugableCanvas/BezierCanvas.test.js'],
   transform: {
     "^.+\\.(js|jsx)?$": "babel-jest",
     "^.+\\.(ts|tsx)?$": "ts-jest",
