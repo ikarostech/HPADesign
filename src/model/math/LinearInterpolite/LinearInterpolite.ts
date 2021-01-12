@@ -1,6 +1,11 @@
 import { Vector2 } from "three/src/math/Vector2";
 import InvalidInputArrayError from "../Error/InvalidInputArrayError/InvalidInputArrayError";
 
+const getXArray = function (vectors: Vector2[], size: number): number[] {
+  const range: number  = vectors[vectors.length - 1].x - vectors[0].x;
+  return Array(size).fill(0).map((_, index) => range * index / (size - 1));
+}
+
 export function LinearInterpolite(vectors: Vector2[], size: number): Vector2[] {
   if (vectors.length < 2) {
     throw new InvalidInputArrayError("LinearInterpolite function needs vectors whose size is over 2 elements");
@@ -12,9 +17,9 @@ export function LinearInterpolite(vectors: Vector2[], size: number): Vector2[] {
     }
   }
 
-  const XArray = getXArray(vectors, size);
+  const XArray: number[] = getXArray(vectors, size);
 
-  let index: number = 0;
+  let index = 0;
   const YArray: number[] = XArray.map(x => {
     while(x<vectors[index].x || vectors[index+1].x<x) {
       index++;
@@ -33,9 +38,4 @@ export function LinearInterpolite(vectors: Vector2[], size: number): Vector2[] {
   }
   
   return resultVector;
-}
-
-const getXArray = function (vectors: Vector2[], size: number): number[] {
-  const range : number  = vectors[vectors.length - 1].x - vectors[0].x;
-  return Array(size).fill(0).map((_, index) => range * index / (size - 1));
 }

@@ -19,36 +19,37 @@ import { CanvasPoint } from './CanvasPoint';
 
 //import { Vector2 } from 'three/src/math/Vector2';
 
-export function buildBezierControls(controls:BezierControls ,linspaceSize: number): Vector2[] {
+export function buildBezierControls(controls: BezierControls ,linspaceSize: number): Vector2[] {
 	const bezierCurve: Vector2[] = [];
-	
+
 	//TODO BezierPointの仕様変更
-	for(let i = 0; i < controls.points.length; i+=2) {
+	for(let i = 0; i < controls.points.length-1; i+=2) {
 		const p1: Vector2 = controls.points[i].point;
 		const c: Vector2 = controls.points[i+1].point;
 		const p2: Vector2 = controls.points[i+2].point;
 
 		for(let n = 0; n < linspaceSize; n++) {
-			let t: number = n / linspaceSize;
-			let pos: Vector2 = 
-				p1.multiplyScalar(Math.pow(1-t, 2))
-				.add(c.multiplyScalar(t*(1-t)))
-				.add(p2.multiplyScalar(Math.pow(t, 2)));
+			const t: number = n / linspaceSize;
+			
+			const pos: Vector2 = 
+				p1.clone().multiplyScalar(Math.pow(1-t, 2))
+				.add(c.clone().multiplyScalar(2*t*(1-t)))
+				.add(p2.clone().multiplyScalar(Math.pow(t, 2)));
 			
 			bezierCurve.push(pos);
 		}
 	}
-	
-	
+	bezierCurve.push(new Vector2(1,0));
+	console.log(bezierCurve)
 	return bezierCurve;
 }
 
 export type DataType = {
-	canvas: any,
-	ctx: any,
-	width: number,
-	height: number,
-	isDrag: boolean
+	canvas: any;
+	ctx: any;
+	width: number;
+	height: number;
+	isDrag: boolean;
 }
 
 export default Vue.extend({
@@ -96,19 +97,19 @@ export default Vue.extend({
 	},
 	
 	methods: {
-		mousedown: function() {
+		mousedown: function(): void {
 			this.isDrag = true;
 		},
-		mouseup: function() {
+		mouseup: function(): void {
 			this.isDrag = false;
 		},
-		mousemove: function() {
+		mousemove: function(): void {
 
 		},
-		draw: function(){
+		draw: function(): void {
 			this.drawCircle();
 		},
-		drawCircle: function() {
+		drawCircle: function(): void {
 			const curves = [this.topControls, this.canverControls];
 			curves.forEach( curve => {
 				curve.points
@@ -125,7 +126,8 @@ export default Vue.extend({
 			
 		},
 		
-		drawLine() {
+		drawLine(): void {
+			
 		},
 	},
 	
