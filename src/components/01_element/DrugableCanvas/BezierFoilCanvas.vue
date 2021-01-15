@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import assert from 'assert'
-import { LinearInterpolite } from '@/src/model/math/LinearInterpolite/LinearInterpolite';
+import { LinearInterpolite } from '@/model/math/LinearInterpolite/LinearInterpolite';
 import { Vector2 } from 'three/src/math/Vector2';
 import Vue, { PropType } from 'vue';
 import { BezierControls } from './BezierControls';
@@ -117,7 +117,7 @@ export default Vue.extend({
 					.map(item => item.point)
 					.forEach(point => {
 						this.ctx.beginPath();
-						this.ctx.arc(point.x, point.y, this.radius, 0 ,Math.PI * 2, false);
+						this.ctx.arc(point.x * 400 + 100, point.y * 400 + 100, this.radius, 0 ,Math.PI * 2, false);
 						this.ctx.fillStyle = curve.controlPointStyle;
 						this.ctx.fill();
 						this.ctx.stroke();
