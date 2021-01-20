@@ -4,6 +4,9 @@ import BezierFoilCanvas from './BezierFoilCanvas.vue';
 
 describe('AIAirfoilCanvas', () => {
   const wrapper = shallowMount(BezierFoilCanvas, {
+    propsData: {
+      radius: 10
+    },
     data() {
       return {
         topControls: {
@@ -53,15 +56,16 @@ describe('AIAirfoilCanvas', () => {
               visible: false
             }
           ]
-        },
-        radius: 10
+        }
       }
     }
   });
   it('snapshot test', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
-
+  it('shapeが更新された際にupdateShapeを出して親を更新する', () => {
+    expect(wrapper.emitted('updateShape')).not.toBeUndefined();
+  });
   it('Bezier制御点から翼型Shapeを作成', () => {
     const actual: Vector2[] = (wrapper.vm as any).getShape;
     const expected: Vector2[] = [
