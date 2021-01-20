@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": false,
     "target": "ES2019",
-    "module": "commonjs",
+    "module": "esnext",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
@@ -14,7 +14,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["src/*"]
     }, 
     "types": [
       "jest",

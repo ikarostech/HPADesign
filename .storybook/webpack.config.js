@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = ({ config }) => {
-  config.resolve.alias['@'] = path.resolve(__dirname, '../src');
+  config.resolve.alias['@'] = path.resolve(__dirname, "../src"),
   config.module.rules.push({
     test: /\.styl$/,
     loaders: ["style-loader", "css-loader", "stylus-loader",{
