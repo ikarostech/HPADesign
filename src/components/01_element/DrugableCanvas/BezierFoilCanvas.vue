@@ -44,7 +44,6 @@ export function buildBezierControls(
     }
   }
   bezierCurve.push(new Vector2(1, 0));
-  console.log(bezierCurve);
   return bezierCurve;
 }
 
@@ -53,6 +52,8 @@ export type select = {
   index: number;
 }
 export type DataType = {
+  topControls: BezierControls;
+  canverControls: BezierControls;
   canvas: any;
   ctx: any;
   width: number;
@@ -64,18 +65,64 @@ export type DataType = {
 export default Vue.extend({
   name: "App",
   props: {
-    topControls: BezierControls,
-    canverControls: BezierControls,
     radius: Number,
   },
   data: function (): DataType {
+    const topControls = new BezierControls();
+    topControls.points = [
+      {
+            point: new Vector2(0.0, 0.0),
+            visible: false,
+          },
+          {
+            point: new Vector2(0.0, 0.09),
+            visible: true,
+          },
+          {
+            point: new Vector2(0.34, 0.09),
+            visible: true,
+          },
+          {
+            point: new Vector2(0.6, 0.09),
+            visible: true,
+          },
+          {
+            point: new Vector2(1.0, 0.0),
+            visible: false,
+          },
+    ];
+    const canverControls = new BezierControls();
+    canverControls.points = [
+          {
+            point: new Vector2(0.0, 0.0),
+            visible: false,
+          },
+          {
+            point: new Vector2(0.2, 0.03),
+            visible: true,
+          },
+          {
+            point: new Vector2(0.55, 0.03),
+            visible: true,
+          },
+          {
+            point: new Vector2(0.65, 0.03),
+            visible: true,
+          },
+          {
+            point: new Vector2(1, 0),
+            visible: false,
+          },
+    ];
     return {
+      topControls: topControls,
+      canverControls: canverControls,
       canvas: null,
       ctx: null,
       width: 600,
       height: 200,
 			isDrag: false,
-			selected: null,
+      selected: null,
     };
   },
 
@@ -107,7 +154,9 @@ export default Vue.extend({
       }
       assert(topShape.length == bottomShape.length + 1);
 
-      return topShape.reverse().concat(bottomShape);
+      const shape = topShape.reverse().concat(bottomShape);
+      this.$emit("updateShape", shape);
+      return shape;
     },
   },
 
@@ -136,7 +185,7 @@ export default Vue.extend({
       if (canverControlFirstMatch >= 0) {
         this.selected = {
           isTop: false,
-          index: topControlFirstMatch
+          index: canverControlFirstMatch
         };
         return;
       }		
@@ -159,13 +208,13 @@ export default Vue.extend({
         this.topControls.points[this.selected.index].point = mousePos.clone();
       } 
       else {
-
+        this.canverControls.points[this.selected.index].point = mousePos.clone();
       }
 
       this.draw();
-      console.log(this.topControls.points.concat(this.canverControls.points).map(controlPoint => controlPoint.point))
 		},
     draw: function (): void {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 			this.drawCircle();
 			this.drawLine();
     },
@@ -187,6 +236,7 @@ export default Vue.extend({
             );
             this.ctx.fillStyle = curve.controlPointStyle;
             this.ctx.fill();
+            this.ctx.strokeStyle = curve.controlPointStyle;
             this.ctx.stroke();
           });
       });
