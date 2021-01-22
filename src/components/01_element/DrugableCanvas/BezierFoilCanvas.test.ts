@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import { Vector2 } from 'three/src/math/Vector2';
 import BezierFoilCanvas from './BezierFoilCanvas.vue';
 
-describe('AIAirfoilCanvas', () => {
+describe('BezierFoilCanvas', () => {
   const wrapper = shallowMount(BezierFoilCanvas, {
     propsData: {
       radius: 10

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AIAirfoilCanvas snapshot test 1`] = `
+exports[`BezierFoilCanvas snapshot test 1`] = `
 <canvas
   height="200"
   width="600"
