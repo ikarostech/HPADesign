@@ -1,7 +1,5 @@
-const path = require('path');
-
 module.exports = {
-  "publicPath": "./",
+  "publicPath": "/project-name/",
   "outputDir": "docs",
   "transpileDependencies": [
     "vuetify"
@@ -10,9 +8,7 @@ module.exports = {
     resolve: {
       alias: {
         vue$: 'vue/dist/vue.esm.js',
-        '@': path.join(__dirname, './src/')
       },
-      extensions: ['.js', '.ts', '.vue', '.json']
     },
   },
 }
