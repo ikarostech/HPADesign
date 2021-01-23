@@ -16,8 +16,9 @@ export default new Router({
             component: Aerodynamics
         },
         {
-            path: '/test',
-            name: 'test',
+            //TODO 一時的な措置としてトップページに翼型操作のタブを出す
+            path: '/',
+            name: 'top',
             component: DrawingAirfoil
         }
     ]
