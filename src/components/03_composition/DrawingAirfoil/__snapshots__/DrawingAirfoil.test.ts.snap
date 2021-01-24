@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DrawingAirfoil snapshot test 1`] = `
+<div>
+  <bezierfoilcanvas-stub
+    radius="5"
+  />
+   
+  <p>
+    C_L = 0
+  </p>
+   
+  <airfoil-export-button-stub />
+</div>
+`;
