@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Aerodynamics from './components/04_product/Aerodynamics/Aerodynamics.vue';
 
-import DrawingAirfoil from './components/04_product/DrawingAirfoil/DrawingAirfoil.vue'
+import DrawingAirfoil from './components/03_composition/DrawingAirfoil/DrawingAirfoil.vue'
 
 Vue.use(Router);
 
