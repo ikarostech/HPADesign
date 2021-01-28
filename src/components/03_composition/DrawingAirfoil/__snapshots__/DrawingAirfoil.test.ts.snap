@@ -10,6 +10,10 @@ exports[`DrawingAirfoil snapshot test 1`] = `
     C_L = 0
   </p>
    
+  <p>
+    C_D = 0
+  </p>
+   
   <airfoil-export-button-stub
     shape=""
   />

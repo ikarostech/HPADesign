@@ -2,6 +2,7 @@
   <div>
     <BezierFoilCanvas @updateShape="updateShape" :radius="5" />
     <p>C_L = {{ C_L }}</p>
+    <p>C_D = {{ C_D }}</p>
     <airfoil-export-button :shape="shape"></airfoil-export-button>
   </div>
 </template>
@@ -12,11 +13,13 @@ import AirfoilExportButton from "@/components/01_element/ExportButton/Airfoil/Ai
 
 import { Vector2 } from "three/src/math/Vector2";
 import { CL_ModelService } from "@/model/tensorflow/CL_ModelProvider/CL_ModelService";
+import { CD_ModelService } from "@/model/tensorflow/CD_ModelProvider/CD_ModelService";
 import { AIAirfoilPoint } from "@/model/tensorflow/AIAirfoilPoint/AIAirfoilPoint";
 
 export type DataType = {
   shape: Vector2[];
   cl_service: CL_ModelService | null;
+  cd_service: CD_ModelService | null;
 };
 
 export default Vue.extend({
@@ -29,6 +32,7 @@ export default Vue.extend({
     return {
       shape: [],
       cl_service: null,
+      cd_service: null,
     };
   },
   methods: {
@@ -49,9 +53,22 @@ export default Vue.extend({
         new AIAirfoilPoint(this.shape.map((point) => point.y))
       );
     },
+    C_D: function (): number {
+      if (
+        this.shape.length === 0 ||
+        this.cd_service === null ||
+        this.cd_service === undefined
+      ) {
+        return 0;
+      }
+      return this.cd_service.predict(
+        new AIAirfoilPoint(this.shape.map((point) => point.y))
+      );
+    },
   },
   mounted: async function () {
     this.cl_service = await CL_ModelService.newBuild();
+    this.cd_service = await CD_ModelService.newBuild();
   },
 });
 </script>
