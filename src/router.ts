@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Aerodynamics from './components/04_product/Aerodynamics/Aerodynamics.vue';
-
-import DrawingAirfoil from './components/03_composition/DrawingAirfoil/DrawingAirfoil.vue'
+import Airfoil from './components/04_product/Airfoil/Airfoil.vue';
 
 Vue.use(Router);
 
@@ -19,7 +18,7 @@ export default new Router({
             //TODO 一時的な措置としてトップページに翼型操作のタブを出す
             path: '/',
             name: 'top',
-            component: DrawingAirfoil
+            component: Airfoil
         }
     ]
 })
