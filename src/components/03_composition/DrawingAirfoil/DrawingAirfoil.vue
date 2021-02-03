@@ -1,8 +1,6 @@
 <template>
   <div>
     <BezierFoilCanvas @updateShape="updateShape" :radius="5" />
-    <p>C_L = {{ C_L }}</p>
-    <p>C_D = {{ C_D }}</p>
     <airfoil-export-button :shape="shape"></airfoil-export-button>
   </div>
 </template>
@@ -49,9 +47,12 @@ export default Vue.extend({
       ) {
         return 0;
       }
-      return this.cl_service.predict(
+      const C_L: number = this.cl_service.predict(
         new AIAirfoilPoint(this.shape.map((point) => point.y))
       );
+      this.$store.dispatch("updateC_L", C_L);
+
+      return C_L;
     },
     C_D: function (): number {
       if (
@@ -61,9 +62,12 @@ export default Vue.extend({
       ) {
         return 0;
       }
-      return this.cd_service.predict(
+      const C_D: number = this.cd_service.predict(
         new AIAirfoilPoint(this.shape.map((point) => point.y))
       );
+      this.$store.dispatch("updateC_D", C_D);
+
+      return C_D;
     },
   },
   mounted: async function () {
