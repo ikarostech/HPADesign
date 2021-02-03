@@ -24,10 +24,7 @@ export default Vue.extend({
       return this.$store.getters.getC_D();
     },
     items: function (): any {
-      return [
-        { key: "C_L", value: this.C_L },
-        { key: "C_D", value: this.C_D },
-      ];
+      return [{ C_L: this.C_L, C_D: this.C_D }];
     },
   },
 });

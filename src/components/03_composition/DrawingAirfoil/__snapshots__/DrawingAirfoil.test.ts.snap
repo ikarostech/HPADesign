@@ -6,14 +6,6 @@ exports[`DrawingAirfoil snapshot test 1`] = `
     radius="5"
   />
    
-  <p>
-    C_L = 0
-  </p>
-   
-  <p>
-    C_D = 0
-  </p>
-   
   <airfoil-export-button-stub
     shape=""
   />
