@@ -52,20 +52,25 @@ describe('DrawingAirfoil', () => {
     expect(component.shape).toBe(shape);
   })
   it("C_L更新時にstore/C_Lの値を更新", async () => {
-    // given
+    //given
     const wrapper = shallowMount(DrawingAirfoil, { store, localVue });
     const component = (wrapper.vm as any);
     // そのまま使うとundefinedになってしまうため無理やり型を入れてしまう
     component.cl_service = await CL_ModelService.newBuild();
+    component.cd_service = await CD_ModelService.newBuild();
     jest.spyOn(component.cl_service, 'predict').mockReturnValue(-1);
+    jest.spyOn(component.cd_service, 'predict').mockReturnValue(-1);
 
     // when
     component.updateShape([new Vector2(1, 1)]);
 
     // then
-    expect(component.shape).toEqual([new Vector2(1, 1)]);
-    expect(component.C_L).toEqual(-1);
-    expect(actions.updateC_L).toBeCalled()
+    wrapper.vm.$nextTick(() => {
+      expect(component.shape).toEqual([new Vector2(1, 1)]);
+      console.log(component.C_L);
+      expect(component.C_L).toEqual(-1);
+      expect(actions.updateC_L).toBeCalled()
+    })
   });
 
   it("C_D更新時にstore/C_Dの値を更新", async () => {
@@ -73,16 +78,23 @@ describe('DrawingAirfoil', () => {
     const wrapper = shallowMount(DrawingAirfoil, { store, localVue });
     const component = (wrapper.vm as any);
     // そのまま使うとundefinedになってしまうため無理やり型を入れてしまう
+    component.cl_service = await CL_ModelService.newBuild();
     component.cd_service = await CD_ModelService.newBuild();
+    jest.spyOn(component.cl_service, 'predict').mockReturnValue(-1);
     jest.spyOn(component.cd_service, 'predict').mockReturnValue(-1);
 
     // when
     component.updateShape([new Vector2(1, 1)]);
 
     // then
-    expect(component.shape).toEqual([new Vector2(1, 1)]);
-    expect(component.C_D).toEqual(-1);
-    expect(actions.updateC_D).toBeCalled()
+    wrapper.vm.$nextTick(() => {
+      expect(component.shape).toEqual([new Vector2(1, 1)]);
+      console.log(component.C_D);
+      expect(component.C_D).toEqual(-1);
+      expect(actions.updateC_D).toBeCalled()
+    })
+
+
   });
 
   it('C_L異常系 - shapeが空の時にC_Lの値を0にする', async () => {

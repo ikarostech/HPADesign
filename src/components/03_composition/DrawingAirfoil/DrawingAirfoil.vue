@@ -16,6 +16,8 @@ import { AIAirfoilPoint } from "@/model/tensorflow/AIAirfoilPoint/AIAirfoilPoint
 
 export type DataType = {
   shape: Vector2[];
+  C_L: number;
+  C_D: number;
   cl_service: CL_ModelService | null;
   cd_service: CD_ModelService | null;
 };
@@ -29,6 +31,8 @@ export default Vue.extend({
   data: function (): DataType {
     return {
       shape: [],
+      C_L: 0,
+      C_D: 0,
       cl_service: null,
       cd_service: null,
     };
@@ -38,36 +42,27 @@ export default Vue.extend({
       this.shape = shape;
     },
   },
-  computed: {
-    C_L: function (): number {
+  watch: {
+    shape: function (val: Vector2[]): void {
       if (
         this.shape.length === 0 ||
         this.cl_service === null ||
-        this.cl_service === undefined
+        this.cd_service === null
       ) {
-        return 0;
+        this.C_L = 0;
+        this.C_D = 0;
+        return;
       }
-      const C_L: number = this.cl_service.predict(
-        new AIAirfoilPoint(this.shape.map((point) => point.y))
+      this.C_L = this.cl_service.predict(
+        new AIAirfoilPoint(val.map((point) => point.y))
       );
-      this.$store.dispatch("updateC_L", C_L);
-
-      return C_L;
-    },
-    C_D: function (): number {
-      if (
-        this.shape.length === 0 ||
-        this.cd_service === null ||
-        this.cd_service === undefined
-      ) {
-        return 0;
-      }
-      const C_D: number = this.cd_service.predict(
-        new AIAirfoilPoint(this.shape.map((point) => point.y))
+      this.C_D = this.cd_service.predict(
+        new AIAirfoilPoint(val.map((point) => point.y))
       );
-      this.$store.dispatch("updateC_D", C_D);
 
-      return C_D;
+      console.log("test");
+      this.$store.dispatch("updateC_L", this.C_L);
+      this.$store.dispatch("updateC_D", this.C_D);
     },
   },
   mounted: async function () {
