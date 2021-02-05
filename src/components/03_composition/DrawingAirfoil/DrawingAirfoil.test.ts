@@ -67,7 +67,6 @@ describe('DrawingAirfoil', () => {
     // then
     wrapper.vm.$nextTick(() => {
       expect(component.shape).toEqual([new Vector2(1, 1)]);
-      console.log(component.C_L);
       expect(component.C_L).toEqual(-1);
       expect(actions.updateC_L).toBeCalled()
     })
@@ -89,7 +88,6 @@ describe('DrawingAirfoil', () => {
     // then
     wrapper.vm.$nextTick(() => {
       expect(component.shape).toEqual([new Vector2(1, 1)]);
-      console.log(component.C_D);
       expect(component.C_D).toEqual(-1);
       expect(actions.updateC_D).toBeCalled()
     })
