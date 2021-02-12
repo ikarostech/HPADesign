@@ -42,9 +42,7 @@ export default Vue.extend({
       ) {
         return 0;
       }
-      return this.cl_service.predict(
-        new AIAirfoilPoint(this.shape.map((point) => point.y))
-      );
+      return this.cl_service.predict(new AIAirfoilPoint(this.shape));
     },
   },
   mounted: async function () {
