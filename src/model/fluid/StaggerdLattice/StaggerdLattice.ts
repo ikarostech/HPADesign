@@ -3,7 +3,7 @@ import PosValue from '@/model/math/PosValue/PosValue'
 
 export default class {
   // スタッガード格子は長方形を想定
-  public constructor(vertex: Vector2[]) {
+  public constructor(vertex: Vector2[], wall = false) {
     this.vertex = vertex;
     this.vel_x = {
       left: {
@@ -40,7 +40,8 @@ export default class {
         .add(vertex[3].clone())
         .divideScalar(4),
       value: 0
-    }
+    };
+    this.wall = wall;
   }
   public vertex: Vector2[];
   public vel_x: {
@@ -52,5 +53,6 @@ export default class {
     bottom: PosValue;
   }
   public pressure: PosValue
+  public wall: boolean;
 
 }
