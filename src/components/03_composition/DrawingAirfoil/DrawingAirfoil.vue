@@ -53,14 +53,9 @@ export default Vue.extend({
         this.C_D = 0;
         return;
       }
-      this.C_L = this.cl_service.predict(
-        new AIAirfoilPoint(val.map((point) => point.y))
-      );
-      this.C_D = this.cd_service.predict(
-        new AIAirfoilPoint(val.map((point) => point.y))
-      );
+      this.C_L = this.cl_service.predict(new AIAirfoilPoint(val));
+      this.C_D = this.cd_service.predict(new AIAirfoilPoint(val));
 
-      console.log("test");
       this.$store.dispatch("updateC_L", this.C_L);
       this.$store.dispatch("updateC_D", this.C_D);
     },
