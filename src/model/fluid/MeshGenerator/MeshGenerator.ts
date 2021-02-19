@@ -2,8 +2,9 @@ import StaggerdLattice from '@/model/fluid/StaggerdLattice/StaggerdLattice';
 import InvalidInputArrayError from '@/model/math/Error/InvalidInputArrayError/InvalidInputArrayError';
 import { AIAirfoilPoint } from '@/model/tensorflow/AIAirfoilPoint/AIAirfoilPoint';
 import { Vector2 } from 'three';
+import OrthogonalMesh from '../OrthogonalMesh/OrthogonalMesh';
 
-export function airfoilMesh(airfoil: AIAirfoilPoint, size: Vector2): StaggerdLattice[][] {
+export function airfoilMesh(airfoil: AIAirfoilPoint, size: Vector2): OrthogonalMesh {
   if (size.x < 1 || size.y < 2) {
     throw new InvalidInputArrayError("size should be over 1x2");
   }
@@ -16,13 +17,13 @@ export function airfoilMesh(airfoil: AIAirfoilPoint, size: Vector2): StaggerdLat
   const topShape: Vector2[] = airfoil.getTopShape();
   const bottomShape: Vector2[] = airfoil.getBottomShape();
 
-  const mesh: StaggerdLattice[][] = new Array(meshSize.x);
+  const table: StaggerdLattice[][] = new Array(meshSize.x);
 
   //init
   for (let i = 0; i < meshSize.x; i++) {
-    mesh[i] = new Array(meshSize.y)
+    table[i] = new Array(meshSize.y)
     for (let j = 0; j < meshSize.y; j++) {
-      mesh[i][j] = new StaggerdLattice([
+      table[i][j] = new StaggerdLattice([
         new Vector2(i * latticeLength, j * latticeLength),
         new Vector2((i + 1) * latticeLength, j * latticeLength),
         new Vector2(i * latticeLength, (j + 1) * latticeLength),
@@ -40,15 +41,19 @@ export function airfoilMesh(airfoil: AIAirfoilPoint, size: Vector2): StaggerdLat
       let flag = false;
       for (let k = 0; k < 4; k++) {
         //console.log("x:" + (i + offsetIndex.x).toString() + "  y:" + (j + offsetIndex.y))
-        const offsetPoint: Vector2 = mesh[i + offsetIndex.x][j + offsetIndex.y].vertex[k].clone().sub(offset);
+        const offsetPoint: Vector2 = table[i + offsetIndex.x][j + offsetIndex.y].vertex[k].clone().sub(offset);
         if (bottomShape[i + k % 2].y < offsetPoint.y && offsetPoint.y < topShape[i + k % 2].y) {
           flag = true
           break;
         }
       }
 
-      mesh[i + offsetIndex.x][j + offsetIndex.y].wall = flag;
+      table[i + offsetIndex.x][j + offsetIndex.y].wall = flag;
     }
+  }
+  const mesh: OrthogonalMesh = {
+    latticeTable: table,
+    vel: new Vector2()
   }
   return mesh;
 }

@@ -11,7 +11,7 @@ describe("airfoilMesh Method", () => {
   }
   const testAirfoil = new AIAirfoilPoint(testAirfoilPoints);
   it("翼型から流体解析格子メッシュを作成する", () => {
-    const actual = MeshGenerator.airfoilMesh(testAirfoil, new Vector2(1, 2))
+    const actual = MeshGenerator.airfoilMesh(testAirfoil, new Vector2(1, 2)).latticeTable
       .map(line => {
         return line.map(lattice => lattice.wall)
       })
