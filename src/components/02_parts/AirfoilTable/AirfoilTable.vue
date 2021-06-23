@@ -3,7 +3,10 @@
 </template>
 <script lang="ts">
 import AirfoilExportButton from "@/components/01_element/ExportButton/Airfoil/AirfoilExportButton.vue";
+import airfoil from '@/model/component/airfoil/airfoil'
+
 import Vue from "vue";
+
 export default Vue.extend({
   //components: { AirfoilExportButton },
   name: "App",
@@ -17,14 +20,12 @@ export default Vue.extend({
     };
   },
   computed: {
-    C_L: function (): number {
-      return this.$store.getters.getC_L();
-    },
-    C_D: function (): number {
-      return this.$store.getters.getC_D();
+    airfoil: function (): airfoil {
+      console.log(this.$store.getters.getAirfoil().c_l)
+      return this.$store.getters.getAirfoil();
     },
     items: function (): any {
-      return [{ C_L: this.C_L, C_D: this.C_D }];
+      return [{ C_L: this.airfoil.c_l, C_D: this.airfoil.c_d }];
     },
   },
 });

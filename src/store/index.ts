@@ -1,40 +1,30 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import airfoil from '@/model/component/airfoil/airfoil'
+
 Vue.use(Vuex);
-
-interface State {
-  C_L: number;
-  C_D: number;
+interface State{
+  airfoil: airfoil;
 }
-
 export default new Vuex.Store({
   state: {
-    C_L: 0,
-    C_D: 0,
+    airfoil: {c_l: 0, c_d: 0}
   } as State,
+  
   getters: {
-    getC_L: (state, getters) => (): number => {
-      return state.C_L;
-    },
-    getC_D: (state, getters) => (): number => {
-      return state.C_D;
-    },
+    getAirfoil: (state, getters) => (): airfoil => {
+      return state.airfoil;
+    }
   },
   mutations: {
-    storeC_L(state, payload): void {
-      state.C_L = payload;
-    },
-    storeC_D(state, payload): void {
-      state.C_D = payload;
+    storeAirfoil(state, payload): void {
+      state.airfoil = payload;
     },
   },
   actions: {
-    updateC_L(context, value): void {
-      context.commit('storeC_L', value)
+    updateAirfoil(context, value): void {
+      context.commit('storeAirfoil', value)
     },
-    updateC_D(context, value): void {
-      context.commit('storeC_D', value)
-    }
   }
 })
