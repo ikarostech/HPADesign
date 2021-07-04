@@ -51,10 +51,14 @@ export default Vue.extend({
         this.airfoil = null
         return;
       }
-      const C_L = this.cl_service.predict(new AIAirfoilPoint(val));
-      const C_D = this.cd_service.predict(new AIAirfoilPoint(val));
+      
+      const airfoilPoint: AIAirfoilPoint = new AIAirfoilPoint(val)
+      const C_L = this.cl_service.predict(airfoilPoint);
+      const C_D = this.cd_service.predict(airfoilPoint);
 
-      this.$store.dispatch("updateAirfoil", new airfoil(C_L, C_D));
+      this.airfoil = new airfoil(C_L, C_D)
+
+      this.$store.dispatch("updateAirfoil",this.airfoil);
     },
   },
   mounted: async function () {

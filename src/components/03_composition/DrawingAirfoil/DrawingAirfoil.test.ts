@@ -6,10 +6,11 @@ import DrawingAirfoil from './DrawingAirfoil.vue';
 import { CL_ModelService } from '@/model/tensorflow/CL_ModelProvider/CL_ModelService';
 import { CD_ModelService } from '@/model/tensorflow/CD_ModelProvider/CD_ModelService';
 import { Vector2 } from 'three/src/math/Vector2';
+import airfoil from '@/model/component/airfoil/airfoil';
 
 
 describe('DrawingAirfoil', () => {
-  let actions: { updateC_L: () => void; updateC_D: () => void }
+  let actions: { updateAirfoil: () => void }
   let store: Store<{}>
 
   const localVue = createLocalVue();
@@ -20,12 +21,11 @@ describe('DrawingAirfoil', () => {
 
   beforeEach(() => {
     actions = {
-      updateC_L: jest.fn(),
-      updateC_D: jest.fn(),
+      updateAirfoil: jest.fn()
     }
 
     store = new Vuex.Store({
-      state: { C_L: 0, C_D: 0 },
+      state: { airfoil: new airfoil(0,0)},
       actions
     })
   })
@@ -67,8 +67,8 @@ describe('DrawingAirfoil', () => {
     // then
     wrapper.vm.$nextTick(() => {
       expect(component.shape).toEqual([new Vector2(1, 1)]);
-      expect(component.C_L).toEqual(-1);
-      expect(actions.updateC_L).toBeCalled()
+      expect(component.airfoil.c_l).toEqual(-1);
+      expect(actions.updateAirfoil).toBeCalled()
     })
   });
 
@@ -88,14 +88,14 @@ describe('DrawingAirfoil', () => {
     // then
     wrapper.vm.$nextTick(() => {
       expect(component.shape).toEqual([new Vector2(1, 1)]);
-      expect(component.C_D).toEqual(-1);
-      expect(actions.updateC_D).toBeCalled()
+      expect(component.airfoil.c_d).toEqual(-1);
+      expect(actions.updateAirfoil).toBeCalled()
     })
 
 
   });
 
-  it('C_L異常系 - shapeが空の時にC_Lの値を0にする', async () => {
+  it('C_L異常系 - shapeが空の時にairfoil=nullにする', async () => {
     // given
     // そのまま使うとundefinedになってしまうため無理やり型を入れてしまう
     component.cl_service = await CL_ModelService.newBuild();
@@ -105,20 +105,7 @@ describe('DrawingAirfoil', () => {
 
     // then
     expect(component.shape).toEqual([]);
-    expect(component.C_L).toEqual(0);
-  });
-
-  it('C_L異常系 - shapeが空の時にC_Dの値を0にする', async () => {
-    // given
-    // そのまま使うとundefinedになってしまうため無理やり型を入れてしまう
-    component.cl_service = await CD_ModelService.newBuild();
-
-    // when
-    component.updateShape([]);
-
-    // then
-    expect(component.shape).toEqual([]);
-    expect(component.C_D).toEqual(0);
+    expect(component.airfoil).toEqual(null);
   });
 
   afterEach(() => {
