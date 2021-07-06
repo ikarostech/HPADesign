@@ -3,7 +3,7 @@
 </template>
 <script lang="ts">
 import AirfoilExportButton from "@/components/01_element/ExportButton/Airfoil/AirfoilExportButton.vue";
-import airfoil from '@/model/component/airfoil/airfoil'
+import Airfoil from '@/model/component/airfoil/Airfoil'
 
 import Vue from "vue";
 
@@ -20,7 +20,7 @@ export default Vue.extend({
     };
   },
   computed: {
-    airfoil: function (): airfoil {
+    airfoil: function (): Airfoil {
       console.log(this.$store.getters.getAirfoil().c_l)
       return this.$store.getters.getAirfoil();
     },

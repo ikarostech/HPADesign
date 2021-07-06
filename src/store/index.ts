@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import airfoil from '@/model/component/airfoil/airfoil'
+import airfoil from '@/model/component/airfoil/Airfoil'
 
 Vue.use(Vuex);
 interface State{

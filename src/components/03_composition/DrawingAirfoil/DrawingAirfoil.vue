@@ -8,7 +8,7 @@
 import Vue from "vue";
 import BezierFoilCanvas from "@/components/01_element/DrugableCanvas/BezierFoilCanvas.vue";
 import AirfoilExportButton from "@/components/01_element/ExportButton/Airfoil/AirfoilExportButton.vue";
-import airfoil from "@/model/component/airfoil/airfoil"
+import airfoil from "@/model/component/airfoil/Airfoil"
 
 import { Vector2 } from "three/src/math/Vector2";
 import { CL_ModelService } from "@/model/tensorflow/CL_ModelProvider/CL_ModelService";
