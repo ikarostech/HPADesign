@@ -29,8 +29,7 @@ export const module = {
 export const resolve = {
   extensions: ['.vue', '.ts'],
   alias: {
-    vue: "vue/dist/vue.js",
-    '@': _resolve(__dirname, '../src')
+    vue: "vue/dist/vue.js"
   }
 };
 export const target = ["web", "es5"];

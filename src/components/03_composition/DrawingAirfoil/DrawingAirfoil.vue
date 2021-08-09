@@ -8,6 +8,7 @@
 import Vue from "vue";
 import BezierFoilCanvas from "@/components/01_element/DrugableCanvas/BezierFoilCanvas.vue";
 import AirfoilExportButton from "@/components/01_element/ExportButton/Airfoil/AirfoilExportButton.vue";
+import airfoil from "@/model/component/airfoil/Airfoil"
 
 import { Vector2 } from "three/src/math/Vector2";
 import { CL_ModelService } from "@/model/tensorflow/CL_ModelProvider/CL_ModelService";
@@ -16,8 +17,7 @@ import { AIAirfoilPoint } from "@/model/tensorflow/AIAirfoilPoint/AIAirfoilPoint
 
 export type DataType = {
   shape: Vector2[];
-  C_L: number;
-  C_D: number;
+  airfoil: airfoil | null;
   cl_service: CL_ModelService | null;
   cd_service: CD_ModelService | null;
 };
@@ -31,8 +31,7 @@ export default Vue.extend({
   data: function (): DataType {
     return {
       shape: [],
-      C_L: 0,
-      C_D: 0,
+      airfoil: null,
       cl_service: null,
       cd_service: null,
     };
@@ -49,15 +48,17 @@ export default Vue.extend({
         this.cl_service === null ||
         this.cd_service === null
       ) {
-        this.C_L = 0;
-        this.C_D = 0;
+        this.airfoil = null
         return;
       }
-      this.C_L = this.cl_service.predict(new AIAirfoilPoint(val));
-      this.C_D = this.cd_service.predict(new AIAirfoilPoint(val));
+      
+      const airfoilPoint: AIAirfoilPoint = new AIAirfoilPoint(val)
+      const C_L = this.cl_service.predict(airfoilPoint);
+      const C_D = this.cd_service.predict(airfoilPoint);
 
-      this.$store.dispatch("updateC_L", this.C_L);
-      this.$store.dispatch("updateC_D", this.C_D);
+      this.airfoil = new airfoil(C_L, C_D)
+
+      this.$store.dispatch("updateAirfoil",this.airfoil);
     },
   },
   mounted: async function () {
