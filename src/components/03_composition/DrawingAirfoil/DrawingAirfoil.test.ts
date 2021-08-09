@@ -2,11 +2,11 @@ import 'jest';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex, { Store } from 'vuex';
 import BezierFoilCanvas from '@/components/01_element/DrugableCanvas/BezierFoilCanvas.vue';
+import Airfoil from '@/model/component/airfoil/Airfoil';
 import DrawingAirfoil from './DrawingAirfoil.vue';
 import { CL_ModelService } from '@/model/tensorflow/CL_ModelProvider/CL_ModelService';
 import { CD_ModelService } from '@/model/tensorflow/CD_ModelProvider/CD_ModelService';
 import { Vector2 } from 'three/src/math/Vector2';
-import Airfoil from '@/model/component/airfoil/Airfoil';
 
 
 describe('DrawingAirfoil', () => {
