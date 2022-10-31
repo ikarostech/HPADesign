@@ -1,23 +1,30 @@
 <template>
-    <v-navigation-drawer color="primary" dark app>
-        <v-list-item>
-            <v-list-item-content>
-                <v-list-item-title>
-                    HPADesign
-                </v-list-item-title>
-                <v-list-item>
-                    Concept
-                </v-list-item>
-                <v-list-item>
-                    Airfoil
-                </v-list-item>
-                <v-list-item>
-                    Aerodynamics
-                </v-list-item>
-                <v-list-item>
-                    Structure
-                </v-list-item>
-            </v-list-item-content>
-        </v-list-item>
+    <v-navigation-drawer app dark permanent>
+        <v-list dense nav>
+            <v-list-item href="concept">
+                <v-list-item-icon>
+                    <v-icon>mdi-view-dashboard</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>concept</v-list-item-content>
+            </v-list-item>
+            <v-list-item href="airfoil">
+                <v-list-item-icon>
+                    <v-icon>mdi-tag-text</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>airfoil</v-list-item-content>
+            </v-list-item>
+            <v-list-item href="aerodynamics">
+                <v-list-item-icon>
+                    <v-icon>mdi-chart-bell-curve</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>aerodynamics</v-list-item-content>
+            </v-list-item>
+            <v-list-item href="structure">
+                <v-list-item-icon>
+                    <v-icon>mdi-sitemap</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>structure</v-list-item-content>
+            </v-list-item>
+        </v-list>
     </v-navigation-drawer>
 </template>
