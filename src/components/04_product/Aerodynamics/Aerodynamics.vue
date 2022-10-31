@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import AerodynamicsTable from '@/components/03_composition/AerodynamicsTable/AerodynamicsTable.vue';
+import AerodynamicsTable from '@/components/02_parts/AerodynamicsTable/AerodynamicsTable.vue';
 export default Vue.extend({
   name: 'App',
 	components: {
