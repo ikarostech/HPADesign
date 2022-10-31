@@ -8,15 +8,21 @@
                 <v-list-item-content>concept</v-list-item-content>
             </v-list-item>
             <v-list-item href="airfoil">
+                <v-list-item-icon>
+                    <v-icon>mdi-tag-text</v-icon>
+                </v-list-item-icon>
                 <v-list-item-content>airfoil</v-list-item-content>
             </v-list-item>
             <v-list-item href="aerodynamics">
                 <v-list-item-icon>
-                    <v-icon>mdi-stacked-line-chart</v-icon>
+                    <v-icon>mdi-chart-bell-curve</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>aerodynamics</v-list-item-content>
             </v-list-item>
             <v-list-item href="structure">
+                <v-list-item-icon>
+                    <v-icon>mdi-sitemap</v-icon>
+                </v-list-item-icon>
                 <v-list-item-content>structure</v-list-item-content>
             </v-list-item>
         </v-list>
