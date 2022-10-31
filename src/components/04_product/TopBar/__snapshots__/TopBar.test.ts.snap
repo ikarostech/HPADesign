@@ -3,7 +3,6 @@
 exports[`TopBar snapshot test 1`] = `
 <v-app-bar
   app=""
-  color="primary"
   dark=""
 >
   <v-app-bar-nav-icon />
